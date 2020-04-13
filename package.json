@@ -1,0 +1,23 @@
+{
+  "name": "multivtm",
+  "version": "0.0.1",
+  "description": "Run multiple VTM instances at once with different configs.",
+  "bin": {
+    "multivtm": "multivtm.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atagulalan/multivtm.git"
+  },
+  "keywords": [
+    "vtm",
+    "vvc",
+    "multivtm"
+  ],
+  "author": "Ata Gülalan <ata@xava.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atagulalan/multivtm/issues"
+  },
+  "homepage": "https://github.com/atagulalan/multivtm#readme"
+}
