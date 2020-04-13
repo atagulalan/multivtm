@@ -65,15 +65,18 @@ function run(options, configs) {
   })
   fs.copyFileSync(
     path.join(`${encoderApp}`),
-    path.join(__dirname, `${outputDir}/${options.configPath}/EncoderApp.exe`)
+    path.join(
+      process.cwd(),
+      `${outputDir}/${options.configPath}/EncoderApp.exe`
+    )
   )
   exec(
     `"${path.join(
-      __dirname,
+      process.cwd(),
       `${outputDir}/${options.configPath}/EncoderApp.exe`
     )}" ${[...reConfig].join(' ')} > ${outputFile} 2>&1`,
     {
-      cwd: path.join(__dirname, `${outputDir}/${options.configPath}/`),
+      cwd: path.join(process.cwd(), `${outputDir}/${options.configPath}/`),
       windowsHide: true,
     },
     function (err, data) {
@@ -85,21 +88,21 @@ function run(options, configs) {
 if (args[0] === '--help' || args[0] === '--h' || args[0] === 'help') {
   help()
 } else {
-  deleteFolderRecursive(path.join(__dirname, `${outputDir}`))
-  fs.mkdirSync(path.join(__dirname, `${outputDir}/`))
-  fs.readdir(path.join(__dirname, `${configsDir}/`), function (err, files) {
+  deleteFolderRecursive(path.join(process.cwd(), `${outputDir}`))
+  fs.mkdirSync(path.join(process.cwd(), `${outputDir}/`))
+  fs.readdir(path.join(process.cwd(), `${configsDir}/`), function (err, files) {
     if (err) return console.log('Unable to scan directory: ' + err)
     files.forEach((configPath) => {
-      fs.mkdirSync(path.join(__dirname, `${outputDir}/${configPath}/`))
+      fs.mkdirSync(path.join(process.cwd(), `${outputDir}/${configPath}/`))
       fs.readdir(
-        path.join(__dirname, `${configsDir}/${configPath}/`),
+        path.join(process.cwd(), `${configsDir}/${configPath}/`),
         function (err, files) {
           if (err) return console.log('Unable to scan directory: ' + err)
           let list = []
           files.forEach(function (file) {
             fs.copyFileSync(
-              path.join(__dirname, `${configsDir}/${configPath}/${file}`),
-              path.join(__dirname, `${outputDir}/${configPath}/${file}`)
+              path.join(process.cwd(), `${configsDir}/${configPath}/${file}`),
+              path.join(process.cwd(), `${outputDir}/${configPath}/${file}`)
             )
             if (file.endsWith('.cfg')) list.push(file)
           })
